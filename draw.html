@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>draw</title>
+  </head>
+  <body></body>
+  <script>
+    const canvas = document.createElement('canvas');
+    canvas.width = innerWidth - 16;
+    canvas.height = innerHeight - 16;
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+      let isDrawing = false;
+      let lastX = 0;
+      let lastY = 0;
+
+      function draw(e) {
+        if (!isDrawing) return;
+        ctx.lineWidth = 5;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#000';
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+        lastX = e.offsetX;
+        lastY = e.offsetY;
+      }
+
+      canvas.addEventListener('mousedown', (e) => {
+        isDrawing = true;
+        lastX = e.offsetX;
+        lastY = e.offsetY;
+      });
+
+      canvas.addEventListener('mousemove', draw);
+
+      canvas.addEventListener('mouseup', () => {
+        isDrawing = false;
+      });
+
+      canvas.addEventListener('mouseout', () => {
+        isDrawing = false;
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.code === 'KeyL') {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      });
+  </script>
+</html>
