@@ -1,0 +1,38 @@
+<html>
+    <head>
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+      <title>highlight</title>
+    </head>
+    <body>
+      <pre>    
+        <code class="language-javascript hljs">
+          function quickSort(arr) {
+            if (arr.length <= 1) {
+              return arr;
+            }
+
+            const pivot = arr[0];
+            const left = [];
+            const right = [];
+
+            for (let i = 1; i < arr.length; i++) {
+              if (arr[i] < pivot) {
+                left.push(arr[i]);
+              } else {
+                right.push(arr[i]);
+              }
+            }
+
+            return [...quickSort(left), pivot, ...quickSort(right)];
+          }
+
+          // Example usage:
+          const arr = [5, 3, 1, 6, 4, 2];
+          const sortedArr = quickSort(arr);
+          console.log(sortedArr); // Output: [1, 2, 3, 4, 5, 6]
+      </code>
+    </pre>
+    <script>hljs.highlightAll();</script>
+  </body>
+</html>
